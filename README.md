@@ -30,3 +30,64 @@
 <li><code>DNX_USER_HOME</code>: path to DNX installation (e.g. /opt/dnx)</li>
 <li><code>DNX_VERSION</code>: version of DNX (.NET Execution Environment) installed</li>
 </ul>
+
+STEP
+Step 1: Create a Linux VM with Docker
+Step 2: Create a container image for your app
+
+
+    git clone git@github.com:aspnet/Home.git aspnet-Home
+    cd aspnet-Home/samples/HelloWeb
+
+In this directory you will see the following files:
+
+    ├── Startup.cs
+    ├── image.jpg
+    └── project.json
+We are going to create a file called Dockerfile in this directory with the following contents:
+
+    FROM microsoft/aspnet
+
+    COPY . /app
+    WORKDIR /app
+    RUN ["dnu", "restore"]
+
+    EXPOSE 5004
+    ENTRYPOINT ["dnx", ".", "kestrel"]
+
+Step 3: Build the container image
+
+Once we have Dockerfile ready, the directory should look like this, a Dockerfile residing with next to the application:
+
+    ├── Dockerfile
+    ├── Startup.cs
+    ├── image.jpg
+    └── project.json
+
+Now we will actually build the Docker image. It is very simple –just run the following Docker command in this directory:
+
+    docker build -t myapp .
+
+
+
+    $ docker images
+    REPOSITORY          TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
+    myapp               latest              ccb7994d2bc1        39 seconds ago      499.8 MB
+    microsoft/aspnet    latest              16b1838c0b34        12 days ago         473.4 MB
+
+Step 4: Run the container
+
+Running the container is the easiest part of the tutorial. Run the following Docker command on your development machine:
+
+    docker run -t -d -p 80:5004 myapp
+
+Once the container is started, the following command can be used to show containers running on your machine:
+
+    $ docker ps
+    CONTAINER ID        IMAGE               COMMAND                CREATED              STATUS              PORTS                  NAMES
+    f70bd9ffbc36        myapp:latest        "/bin/sh -c 'dnx .     About a minute ago   Up About a minute   0.0.0.0:80->5004/tcp   mad_goodall
+
+Now let's head to the browser to see if it is working. Open http://your-cloud-service-name.cloudapp.net:80/ in your web browser:
+
+![alt tag](http://blogs.msdn.com/resized-image.ashx/__size/550x0/__key/communityserver-blogs-components-weblogfiles/00-00-00-63-56/1401.Image-2015_2D00_01_2D00_10-at-11.26.50-AM.png
+)
