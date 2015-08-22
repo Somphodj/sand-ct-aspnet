@@ -1,4 +1,4 @@
-<h1><a id="user-content-aspnet-5-preview-docker-image" class="anchor" href="#aspnet-5-preview-docker-image" aria-hidden="true"><span class="octicon octicon-link"></span></a>ASP.NET 5 Preview Docker Image</h1>
+![alt tag](https://avatars3.githubusercontent.com/u/6476660?v=3&s=200)
 
 <p>This repository contains <code>Dockerfile</code> definitions for <a href="https://github.com/aspnet/home">ASP.NET 5</a> Docker images.</p>
 
