@@ -1,2 +1,1 @@
-# sand-ct-aspnet
- Docker image for ASP.NET 5. https://registry.hub.docker.com/u/microsoft/aspnet/
+1.0.0-beta6/README.md
